@@ -9,7 +9,10 @@ app = Flask(__name__)
 @app.route("/contract/<int:id>")
 def contract(idnum):
     if [c.id for c in contracts if c.id == idnum]:
-        return make_response({f"{idnum}": f"{[c.id for c in contracts if c.id == idnum]}"})
+        return make_response({f"{idnum}": f"{[c.id for c in contracts if c.id == idnum]}"}, 200)
+    
+    else:
+        return make_response({"Error": "Item not found"}, 404)
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
