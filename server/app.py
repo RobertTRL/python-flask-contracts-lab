@@ -8,9 +8,8 @@ app = Flask(__name__)
 
 @app.route("/contract/<int:id>")
 def contract(id):
-    match = next((c for c in contracts if int(c["id"]) == int(id)), None)
-    if match:
-        return make_response(match["contract_information"], 200)
+    if [c for c in contracts if c["id"] == id]:
+        return make_response((c["contract_information"] for c in contracts if c["id"] == id), 200)
     
     else:
         return make_response({"Error": "Item not found"}, 404)
