@@ -14,5 +14,13 @@ def contract(id):
     else:
         return make_response({"Error": "Item not found"}, 404)
 
+@app.route("/customer/<string:customer_name>")
+def customer(customer_name):
+    if customer_name in customers:
+        return make_response("", 204)
+    
+    else:
+        return make_response({"Error": "Item not found"}, 404)
+        
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
